@@ -1,0 +1,120 @@
+$content_width: 1280px;
+
+$font_base: 14px;
+$font_large: 20px;
+
+$color_blue: #1f90de;
+
+/* common css START */
+html, body{
+  font-size: $font_base;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+p, ul, ol, h1, h2, h3, h4, h5, h6{
+  margin: 0;
+  padding: 0;
+}
+ul,ol,li{
+  list-style: none;
+}
+.red_txt{
+  color: red;
+}
+/* common css END */
+
+/* login.vue */
+.bg{
+  height: 100vh;
+  background-image: url("../assets/background.png");
+  background-size: cover;
+  .login{
+    max-width: 90vw;
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 20vh;
+    background: rgba(245, 245, 245, 0.8);
+    border-radius: 10px;
+    padding: 50px;
+  }
+}
+/* header.vue */
+.header{
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  .top_header_content{
+    color: #fff;
+    // border-bottom: 1px solid #f5f5f5;
+    .top_header{
+      display: flex;
+      justify-content: space-between;
+      max-width: $content_width;
+      height: inherit;
+      margin: 0 auto;
+      .left{
+        display: flex;
+        align-items: center;
+        .logo_img{
+          width: 50px;
+          height: 50px;
+        }
+        .logo_dec{
+          margin-left: 10px;
+          font-size: 20px;
+        }
+      }
+      .right{
+        line-height: 50px;
+        font-size: 16px;
+        .btn{
+          margin-left: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .sub_header_content{
+    background: #fff;
+    .sub_header{
+      max-width: $content_width;
+      margin: 0 auto;
+      color: #fff;
+    }
+  }
+  
+}
+/* home.vue */
+.home{
+  width: 100%;
+  background: #f1f1f1;
+  .home_content{
+    max-width: $content_width;
+    margin: 0 auto;
+    margin-top: 20px;
+    min-height: calc(100vh - 98px);
+    // box-shadow: 1px 1px 10px #eee;
+    display: flex;
+    .left_home{
+      padding-right: 10px;
+      .cur_title{
+        font-size: $font_large;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #ddd;
+        box-sizing: content-box;;
+        height: 36px;
+        line-height: 36px;
+        span{
+          display: inline-block;
+          color: $color_blue;
+          border-bottom: 2px solid $color_blue;
+        }
+      }
+      width: 60%;
+    }
+    .right_home{
+      flex: 1;
+      // border-left: 1px solid #ccc;
+    }
+  }
+}
