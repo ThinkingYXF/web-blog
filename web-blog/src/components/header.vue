@@ -8,7 +8,7 @@
         </div>
         <div class="right">
           <div class="logined" v-if="isLogin">
-            欢迎 <span class="red_txt">{{ loginname }}</span>
+            欢迎 <span class="red_txt">{{ userInfo.username }}</span>
           </div>
           <div class="nologin" v-else>
             <span class="btn" @click="goLogin">登录</span>
@@ -36,11 +36,12 @@
 <script>
 export default {
   name: "top-header",
-  props: {},
+  props: {
+    userInfo: Object,
+  },
   data() {
     return {
       isLogin: true,
-      loginname: "yxf",
       tab: null,
       items: ["首页", "消息", "文章"],
     };

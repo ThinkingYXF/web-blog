@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <v-header></v-header>
+    <v-header :userInfo="userInfo"></v-header>
     <div class="home_content">
       <div class="left_home">
         <div class="cur_title">
@@ -24,6 +24,9 @@ export default {
   },
   data() {
     return {
+      userInfo: {
+        username: ""
+      },
       cardInfo: {
         imgUrl: require("@/assets/background.png"),
         title: "今天天气真的很好呀",
@@ -31,6 +34,18 @@ export default {
           "一般个人博客站的空间都不是太大，流量也是有限制的。如果网站的访问速度和存储空间不够的话，就需要花钱去升级虚拟主机了。",
       },
     };
+  },
+  created() {
+    this.getUserInfo();
+  },
+  methods: {
+    getUserInfo() {
+      this.apis.getUser().then((res) => {
+        if (res.code == 200 && res.result) {
+          this.userInfo = res.result
+        }
+      });
+    },
   },
 };
 </script>

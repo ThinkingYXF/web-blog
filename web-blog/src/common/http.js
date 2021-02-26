@@ -39,10 +39,13 @@ $https.interceptors.response.use(
   }
 );
 
-function $post(url, params) {
+export function $post(url, params) {
   params = params || {};
   let postData = JSON.stringify(params);
   return $https.post(baseURL + url, postData);
 }
+export function $get(url, params) {
+  params = params || {};
+  return $https.get(baseURL + url, params);
+}
 
-export default $post;
