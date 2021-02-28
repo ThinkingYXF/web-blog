@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <v-main class="bg">
       <div class="login">
         <v-form>
@@ -26,7 +26,7 @@
         </v-form>
       </div>
     </v-main>
-  </v-app>
+  </div>
 </template>
 <script>
 export default {
@@ -38,6 +38,7 @@ export default {
       },
     };
   },
+  created() {},
   methods: {
     login() {
       if (!this.form.username || !this.form.password) {

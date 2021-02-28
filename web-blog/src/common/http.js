@@ -1,6 +1,7 @@
 import axios from "axios";
-// import router from "../router";
 const $https = axios.create();
+import Message from "@/components/Message/index"
+import Loading from "../components/Loading/index";
 let baseURL = "";
 // 环境的切换
 if (process.env.NODE_ENV == "development") {
@@ -11,10 +12,11 @@ if (process.env.NODE_ENV == "development") {
 $https.defaults.timeout = 40000;
 //$https.defaults.withCredentials = false; //让ajax携带cookie
 $https.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
-//$https.defaults.headers.post['apiVersion']='1.0.0';
 //添加一个请求拦截器
 $https.interceptors.request.use(
   config => {
+    Loading.close();
+    Loading();
     return config;
   },
   err => {
@@ -25,16 +27,19 @@ $https.interceptors.request.use(
 //添加一个响应拦截器
 $https.interceptors.response.use(
   res => {
+    Loading.close();
     if (res.data.code != 200) {
       if (res.data.message) {
-        alert(res.data.message)
+        Message.warning(res.data.message)
       } else {
-        alert("系统繁忙，请稍后重试")
+        Message.warning("系统繁忙，请稍后重试")
       }
     }
     return res.data;
   },
   err => {
+    Loading.close();
+    Message.warning("系统繁忙，请联系管理员")
     return Promise.reject(err);
   }
 );
