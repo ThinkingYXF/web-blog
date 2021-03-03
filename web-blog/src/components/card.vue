@@ -1,15 +1,15 @@
 <template>
   <div class="card_content">
     <div class="left_img">
-      <img :src="cardInfo.imgUrl" class="card_img" />
+      <img :src="basePreImg + cardInfo.imgUrl" class="card_img" />
     </div>
     <div class="right_con">
       <h2 :title="cardInfo.title">{{ cardInfo.title }}</h2>
       <div class="card_tip">
-        <span>听风是雨</span>
-        <span>2021-02-12</span>
+        <span>{{ cardInfo.username }}</span>
+        <span>{{ cardInfo.createTime | formatDate }}</span>
       </div>
-      <div class="card_dec">{{ cardInfo.dec }}</div>
+      <div class="card_dec">{{ cardInfo.description }}</div>
     </div>
   </div>
 </template>

@@ -18,4 +18,9 @@ app.use(bodyParser())
 //使用路由
 app.use(router.routes()).use(router.allowedMethods())
 
+//静态资源
+const static = require("koa-static")
+const path = require("path")
+app.use(static(path.join(__dirname, './static')));
+
 app.listen(config.interfacePort)

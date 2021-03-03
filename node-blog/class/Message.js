@@ -27,5 +27,11 @@ class MessageDTO {
     this.errMessages = msg
     this.result = null
   }
+  //设置未登录消息
+  setUnLogin() {
+    this.code = 900
+    this.message = "用户未登录"
+    this.result = null
+  }
 }
 module.exports = MessageDTO

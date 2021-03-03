@@ -1,8 +1,9 @@
 const Router = require("koa-router")
 let loginRouter = new Router()
-let MessageDTO = require("../class/Message"); //消息DTO
-const mysql_str = require("../sql/sql")     //sql语句
-const Common = require("../util")             //公共方法
+let MessageDTO = require("../class/Message");         //消息DTO
+const mysql_str = require("../sql/sql")               //sql语句
+const Common = require("../common/sql_option")        //公共方法
+let jwt = require("../common/jwt")
 
 
 /**
@@ -15,6 +16,9 @@ loginRouter.post("/login", async ctx => {
   let req = ctx.request.body
   let res = await Common.sql_query(mysql_str.getUserInfoByName(req.username), true)
   if (res.password == req.password) {
+    //创建token
+    jwt.createToken(res, ctx)
+    //返回数据
     var result = {
       userId: res.id,
       username: res.username,

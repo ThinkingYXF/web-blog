@@ -2,6 +2,7 @@ import axios from "axios";
 const $https = axios.create();
 import Message from "@/components/Message/index"
 import Loading from "../components/Loading/index";
+import router from "../router/index"
 let baseURL = "";
 // 环境的切换
 if (process.env.NODE_ENV == "development") {
@@ -15,6 +16,7 @@ $https.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 //添加一个请求拦截器
 $https.interceptors.request.use(
   config => {
+    config.headers.Authorization = "Bearer " + sessionStorage.getItem("loginToken")
     Loading.close();
     Loading();
     return config;
@@ -28,11 +30,22 @@ $https.interceptors.request.use(
 $https.interceptors.response.use(
   res => {
     Loading.close();
-    if (res.data.code != 200) {
+    if (res.data.code == 900) {
+      sessionStorage.removeItem("loginToken")
+      Message.warning("登录超时")
+      router.replace({
+        path: "/"
+      })
+    } else if (res.data.code != 200) {
       if (res.data.message) {
         Message.warning(res.data.message)
       } else {
         Message.warning("系统繁忙，请稍后重试")
+      }
+    } else if (res.data.code == 200) {
+      let t = res.headers["x-jwt-token"];
+      if (t) {
+        sessionStorage.setItem("loginToken", t)
       }
     }
     return res.data;

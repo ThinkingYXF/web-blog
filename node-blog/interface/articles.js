@@ -1,17 +1,16 @@
 const Router = require("koa-router")
-let userRouter = new Router()
+let articleRouter = new Router()
 let MessageDTO = require("../class/Message");     //消息DTO
 const mysql_str = require("../sql/sql")           //sql语句
-const Common = require("../common/sql_option")          //公共方法
+const Common = require("../common/sql_option")    //公共方法
 let jwt = require("../common/jwt")
 
 
 /**
- * 查询登录人信息
- * @params username 用户名
- * @params password 密码
+ * 查询文章列表
+ * @params
  */
-userRouter.get("/userInfo", async ctx => {
+articleRouter.get("/articleList", async ctx => {
   let message = new MessageDTO()
   let userInfo = null
   try {
@@ -21,13 +20,8 @@ userRouter.get("/userInfo", async ctx => {
       ctx.body = message;
     } else {
       jwt.refreshToken(userInfo, ctx)
-      let res = await Common.sql_query(mysql_str.getUserInfoById(userInfo.userId), true)
-      var result = {
-        userId: res.id,
-        username: res.username,
-        createTime: res.createTime
-      }
-      message.setResult(result)
+      let res = await Common.sql_query(mysql_str.getArticleList(userInfo.userId))
+      message.setResult(res)
       ctx.body = message
     }
   } catch (e) {
@@ -37,4 +31,4 @@ userRouter.get("/userInfo", async ctx => {
   }
 })
 
-module.exports = userRouter
+module.exports = articleRouter

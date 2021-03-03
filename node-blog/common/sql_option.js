@@ -1,4 +1,4 @@
-const config = require("./config.json")
+const config = require("../config.json")
 let mysql = require("mysql")
 //mysql
 var connection = mysql.createConnection(config.mysql_config)
@@ -28,7 +28,7 @@ const Common = {
         }
       })
     });
-  }
+  },
 }
 
 module.exports = Common;

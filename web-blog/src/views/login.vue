@@ -46,9 +46,11 @@ export default {
       }
       this.apis.login(this.form).then((res) => {
         if (res.code == 200) {
-          this.$router.push({
-            path: "/home",
-          });
+          setTimeout(() => {
+            this.$router.push({
+              path: "/home",
+            });
+          }, 500);
         }
       });
     },

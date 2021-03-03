@@ -1,9 +1,12 @@
 import { $post, $get } from "./http";
 export default {
-  login: (params) => {
+  login(params) {
     return $post("/login", params);
   },
-  getUser: () => {
+  getUser() {
     return $get("/userInfo")
+  },
+  getArticleList() {
+    return $get("/articleList")
   }
 }

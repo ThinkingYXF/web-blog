@@ -6,8 +6,8 @@
         <div class="cur_title">
           <span>最新</span>
         </div>
-        <div v-for="(v, i) in 3" :key="i">
-          <v-card :cardInfo="cardInfo"></v-card>
+        <div v-for="(v, i) in list" :key="i">
+          <v-card :cardInfo="v"></v-card>
         </div>
       </div>
       <div class="right_home"></div>
@@ -25,24 +25,27 @@ export default {
   data() {
     return {
       userInfo: {
-        username: ""
+        username: "",
       },
-      cardInfo: {
-        imgUrl: require("@/assets/background.png"),
-        title: "今天天气真的很好呀",
-        dec:
-          "一般个人博客站的空间都不是太大，流量也是有限制的。如果网站的访问速度和存储空间不够的话，就需要花钱去升级虚拟主机了。",
-      },
+      list: [],
     };
   },
   created() {
     this.getUserInfo();
+    this.getArticles();
   },
   methods: {
     getUserInfo() {
       this.apis.getUser().then((res) => {
         if (res.code == 200 && res.result) {
-          this.userInfo = res.result
+          this.userInfo = res.result;
+        }
+      });
+    },
+    getArticles() {
+      this.apis.getArticleList().then((res) => {
+        if (res.code == 200) {
+          this.list = res.result || [];
         }
       });
     },
