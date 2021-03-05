@@ -9,6 +9,7 @@
         <div class="right">
           <div class="logined" v-if="isLogin">
             欢迎 <span class="red_txt">{{ userInfo.username }}</span>
+            <v-btn text dark class="white-text" @click="logout">退出</v-btn>
           </div>
           <div class="nologin" v-else>
             <span class="btn" @click="goLogin">登录</span>
@@ -49,7 +50,13 @@ export default {
   methods: {
     goLogin() {
       this.$router.push({
-        path: "/login",
+        path: "/",
+      });
+    },
+    logout() {
+      this.$store.commit("setToken", "");
+      this.$router.push({
+        path: "/",
       });
     },
   },

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from "./router/index.js"
+import store from "./store/index"
 import vuetify from "@/plugins/vuetify"
 import '@mdi/font/css/materialdesignicons.css'    //vuetify icon
 import Message from "@/components/Message/index"
@@ -19,6 +20,7 @@ Object.keys(filter).forEach((key) => {
 Vue.config.productionTip = false
 
 new Vue({
+  store,
   router,
   vuetify,
   render: h => h(App),

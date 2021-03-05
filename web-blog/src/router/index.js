@@ -1,5 +1,6 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
+import store from "../store/index"
 
 Vue.use(VueRouter)
 
@@ -32,7 +33,7 @@ const router = new VueRouter({
 //路由校验
 router.beforeEach((to, from, next) => {
   if (to.meta.auth) {
-    if (sessionStorage.getItem("loginToken")) {
+    if (store.state.loginToken) {
       next()
     } else {
       next({ path: "/" })
