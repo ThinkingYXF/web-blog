@@ -4,7 +4,7 @@
       <div class="top_header">
         <div class="left">
           <img class="logo_img" src="../assets/logo.png" alt="" />
-          <!-- <span class="logo_dec">JS攻城狮</span> -->
+          <span class="logo_dec">JS攻城狮</span>
         </div>
         <div class="right">
           <div class="logined" v-if="isLogin">
@@ -23,7 +23,6 @@
         <!-- <v-app> -->
         <v-tabs v-model="tab" align-with-title color="#1f90de">
           <v-tabs-slider color="#1f90de"></v-tabs-slider>
-
           <v-tab v-for="item in items" :key="item">
             {{ item }}
           </v-tab>

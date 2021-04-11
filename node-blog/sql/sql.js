@@ -9,7 +9,7 @@ const Sql = {
   },
   //查询最新10条文章
   getArticleList(userId) {
-    return `select * from articles where userId="${userId}" ORDER BY 'createTime' DESC limit 10;`
+    return `select * from articles where userId="${userId}" ORDER BY createTime DESC limit 10;`
   }
 }
 

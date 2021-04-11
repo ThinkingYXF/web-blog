@@ -90,7 +90,7 @@ ul,ol,li{
   .home_content{
     max-width: $content_width;
     margin: 0 auto;
-    margin-top: 20px;
+    padding: 20px 0;
     min-height: calc(100vh - 98px);
     // box-shadow: 1px 1px 10px #eee;
     display: flex;
