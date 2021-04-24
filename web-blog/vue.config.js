@@ -1,4 +1,6 @@
 module.exports = {
+  outputDir: 'blog',
+  assetsDir: 'static',
   devServer: {
     open: true,
     port: 3008,
