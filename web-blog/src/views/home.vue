@@ -1,6 +1,18 @@
 <template>
   <div class="home">
-    <v-header :userInfo="userInfo"></v-header>
+    <v-header></v-header>
+    <div class="sub_header_content">
+      <div class="sub_header">
+        <!-- <v-app> -->
+        <v-tabs v-model="tab" align-with-title color="#1f90de">
+          <v-tabs-slider color="#1f90de"></v-tabs-slider>
+          <v-tab v-for="item in items" :key="item">
+            {{ item }}
+          </v-tab>
+        </v-tabs>
+        <!-- </v-app> -->
+      </div>
+    </div>
     <div class="home_content">
       <div class="left_home">
         <div class="cur_title">
@@ -24,24 +36,15 @@ export default {
   },
   data() {
     return {
-      userInfo: {
-        username: "",
-      },
       list: [],
+      tab: null,
+      items: ["首页", "消息", "文章"],
     };
   },
   created() {
-    this.getUserInfo();
     this.getArticles();
   },
   methods: {
-    getUserInfo() {
-      this.apis.getUser().then((res) => {
-        if (res.code == 200 && res.result) {
-          this.userInfo = res.result;
-        }
-      });
-    },
     getArticles() {
       this.apis.getArticleList().then((res) => {
         if (res.code == 200) {

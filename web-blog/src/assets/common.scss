@@ -72,7 +72,12 @@ ul,ol,li{
         }
       }
     }
-  }
+  }  
+}
+/* home.vue */
+.home{
+  width: 100%;
+  background: #f1f1f1;
   .sub_header_content{
     background: #fff;
     .sub_header{
@@ -81,12 +86,6 @@ ul,ol,li{
       color: #fff;
     }
   }
-  
-}
-/* home.vue */
-.home{
-  width: 100%;
-  background: #f1f1f1;
   .home_content{
     max-width: $content_width;
     margin: 0 auto;
@@ -114,6 +113,20 @@ ul,ol,li{
     .right_home{
       flex: 1;
       // border-left: 1px solid #ccc;
+    }
+  }
+}
+
+/* upload.vue */
+.upload{
+  width: 100%;
+  background: #fff;
+  .upload_content{
+    max-width: $content_width;
+    margin: 0 auto;
+    .file_input{
+      width: 400px;
+      margin-top: 50px;
     }
   }
 }

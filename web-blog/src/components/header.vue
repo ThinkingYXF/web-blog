@@ -18,35 +18,29 @@
         </div>
       </div>
     </div>
-    <div class="sub_header_content">
-      <div class="sub_header">
-        <!-- <v-app> -->
-        <v-tabs v-model="tab" align-with-title color="#1f90de">
-          <v-tabs-slider color="#1f90de"></v-tabs-slider>
-          <v-tab v-for="item in items" :key="item">
-            {{ item }}
-          </v-tab>
-        </v-tabs>
-        <!-- </v-app> -->
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "top-header",
-  props: {
-    userInfo: Object,
-  },
   data() {
     return {
+      userInfo: {},
       isLogin: true,
-      tab: null,
-      items: ["首页", "消息", "文章"],
     };
   },
+  created() {
+    this.getUserInfo();
+  },
   methods: {
+    getUserInfo() {
+      this.apis.getUser().then((res) => {
+        if (res.code == 200 && res.result) {
+          this.userInfo = res.result;
+        }
+      });
+    },
     goLogin() {
       this.$router.push({
         path: "/",

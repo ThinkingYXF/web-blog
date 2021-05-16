@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 
 const Login = resolve => require(["@/views/login.vue"], resolve)
 const Home = resolve => require(["@/views/home.vue"], resolve)
+const Upload = resolve => require(["@/views/upload.vue"], resolve)
 
 const router = new VueRouter({
   routes: [
@@ -26,6 +27,14 @@ const router = new VueRouter({
         auth: true
       },
       component: Home
+    },
+    {
+      path: "/upload",
+      name: "upload",
+      meta: {
+        auth: true
+      },
+      component: Upload
     }
   ]
 })

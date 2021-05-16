@@ -58,6 +58,12 @@ $https.interceptors.response.use(
   }
 );
 
+export function $postFiles(url, params) {
+  params = params || {};
+  return $https.post(baseURL + url, params, {
+    "Content-Type": "multipart/form-data"
+  });
+}
 export function $post(url, params) {
   params = params || {};
   let postData = JSON.stringify(params);
