@@ -128,5 +128,15 @@ ul,ol,li{
       width: 400px;
       margin-top: 50px;
     }
+    .files{
+      display: flex;
+      .file{
+        margin-right: 10px;
+        margin-bottom: 10px;
+        background: #5cbbf6;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
   }
 }

@@ -21,7 +21,15 @@
           </span>
         </template>
       </v-file-input>
-      <v-btn @click="uploadFile">上传</v-btn>
+      <p><v-btn color="primary" @click="uploadFile">上传</v-btn></p>
+      <p>
+        <v-btn color="primary" @click="getFiles">获取资源</v-btn>
+      </p>
+      <div class="files">
+        <v-chip class="file" v-for="(v, i) in result" :key="i">
+          {{ v }}
+        </v-chip>
+      </div>
     </div>
   </div>
 </template>
@@ -34,10 +42,18 @@ export default {
   data() {
     return {
       files: [],
+      result: [],
     };
   },
   created() {},
   methods: {
+    getFiles() {
+      this.apis.getUploadResouces().then((res) => {
+        if (res.code == 200) {
+          this.result = res.result;
+        }
+      });
+    },
     uploadFile() {
       if (this.files.length == 0) {
         return;

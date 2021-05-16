@@ -1,3 +1,4 @@
+//处理 multipart/form-data 类型文件
 const multer = require('koa-multer')
 
 let storage = multer.diskStorage({
@@ -7,8 +8,9 @@ let storage = multer.diskStorage({
     },
     //修改文件名称
     filename: function (req, file, cb) {
-        let fileFormat = (file.originalname).split(".");  //以点分割成数组，数组的最后一项就是后缀名
-        cb(null, 'file' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
+        // let fileFormat = (file.originalname).split(".");  //以点分割成数组，数组的最后一项就是后缀名
+        // cb(null, 'file' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
+        cb(null, file.originalname);
     }
 })
 

@@ -9,6 +9,9 @@ export default {
   getArticleList() {
     return $get("/articleList")
   },
+  getUploadResouces() {
+    return $get("/getResouces")
+  },
   //单文件上传
   uploadFile(params) {
     return $postFiles("/singleUpload", params)

@@ -5,6 +5,7 @@ const mysql_str = require("../sql/sql")               //sql语句
 const Common = require("../common/sql_option")        //公共方法
 let jwt = require("../common/jwt")
 const upload = require('../common/multer')  // 文件上传
+let fs = require("fs")
 
 
 /**
@@ -17,7 +18,7 @@ uploadRouter.post("/singleUpload", upload.single('file'), async ctx => {
         userInfo = await jwt.checkToken(ctx.request.header.authorization)
         if (userInfo === null) {
             message.setUnLogin()
-            ctx.body = message;
+            ctx.body = message
         } else {
             jwt.refreshToken(userInfo, ctx)
             let file = ctx.req.file
@@ -30,7 +31,7 @@ uploadRouter.post("/singleUpload", upload.single('file'), async ctx => {
     } catch (e) {
         console.log("error: ", e)
         message.setUnLogin()
-        ctx.body = message;
+        ctx.body = message
     }
 })
 
@@ -44,7 +45,7 @@ uploadRouter.post("/multiUpload", upload.array('file', 1000), async ctx => {
         userInfo = await jwt.checkToken(ctx.request.header.authorization)
         if (userInfo === null) {
             message.setUnLogin()
-            ctx.body = message;
+            ctx.body = message
         } else {
             jwt.refreshToken(userInfo, ctx)
             let result = []
@@ -61,7 +62,35 @@ uploadRouter.post("/multiUpload", upload.array('file', 1000), async ctx => {
     } catch (e) {
         console.log("error: ", e)
         message.setUnLogin()
-        ctx.body = message;
+        ctx.body = message
+    }
+})
+
+/**
+ * 获取文件夹下文件列表
+ */
+uploadRouter.get("/getResouces", async ctx => {
+    let message = new MessageDTO()
+    let userInfo = null
+    try {
+        userInfo = await jwt.checkToken(ctx.request.header.authorization)
+        if (userInfo === null) {
+            message.setUnLogin()
+            ctx.body = message
+        } else {
+            jwt.refreshToken(userInfo, ctx)
+            let result = []
+            let files = fs.readdirSync("./static/uploads");
+            files.forEach(v => {
+                result.push(v);
+            });
+            message.setResult(result)
+            ctx.body = message
+        }
+    } catch (e) {
+        console.log("error: ", e)
+        message.setUnLogin()
+        ctx.body = message
     }
 })
 
