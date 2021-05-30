@@ -4,9 +4,15 @@ import store from "../store/index"
 
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 const Login = resolve => require(["@/views/login.vue"], resolve)
 const Home = resolve => require(["@/views/home.vue"], resolve)
 const Upload = resolve => require(["@/views/upload.vue"], resolve)
+const Resource = resolve => require(["@/views/resource.vue"], resolve)
 
 const router = new VueRouter({
   routes: [
@@ -35,6 +41,14 @@ const router = new VueRouter({
         auth: true
       },
       component: Upload
+    },
+    {
+      path: "/resource",
+      name: "resource",
+      meta: {
+        auth: true
+      },
+      component: Resource
     }
   ]
 })

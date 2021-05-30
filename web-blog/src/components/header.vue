@@ -4,9 +4,11 @@
       <div class="top_header">
         <div class="left">
           <img class="logo_img" src="../assets/logo.png" alt="" />
-          <span class="logo_dec">JS攻城狮</span>
+          <span class="logo_dec" @click="toHome">JS攻城狮</span>
         </div>
-        <div class="right">
+        <div class="right d-flex">
+          <span class="mr-4 upload_btn" @click="toUpload">资源维护</span>
+
           <div class="logined" v-if="isLogin">
             欢迎 <span class="red_txt">{{ userInfo.username }}</span>
             <v-btn text dark class="white-text" @click="logout">退出</v-btn>
@@ -50,6 +52,16 @@ export default {
       this.$store.commit("setToken", "");
       this.$router.push({
         path: "/",
+      });
+    },
+    toHome() {
+      this.$router.push({
+        path: "/home",
+      });
+    },
+    toUpload() {
+      this.$router.push({
+        path: "/upload",
       });
     },
   },

@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   plugins: [
     persistedState({
-      storage: window.sessionStorage
+      storage: window.localStorage
     })
   ],
   state: {

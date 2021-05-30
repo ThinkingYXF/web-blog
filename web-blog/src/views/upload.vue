@@ -26,9 +26,16 @@
         <v-btn color="primary" @click="getFiles">获取资源</v-btn>
       </p>
       <div class="files">
-        <v-chip class="file" v-for="(v, i) in result" :key="i">
-          {{ v }}
-        </v-chip>
+        <a
+          :href="'/#/resource?url=' + v"
+          target="_blank"
+          v-for="(v, i) in result"
+          :key="i"
+        >
+          <v-chip class="file">
+            {{ v }}
+          </v-chip>
+        </a>
       </div>
     </div>
   </div>

@@ -19,6 +19,9 @@ p, ul, ol, h1, h2, h3, h4, h5, h6{
 ul,ol,li{
   list-style: none;
 }
+a{
+  text-decoration: none;
+}
 .red_txt{
   color: red;
 }
@@ -62,12 +65,16 @@ ul,ol,li{
         .logo_dec{
           margin-left: 10px;
           font-size: 20px;
+          cursor: pointer;
         }
       }
       .right{
         line-height: 50px;
         .btn{
           margin-left: 20px;
+          cursor: pointer;
+        }
+        .upload_btn{
           cursor: pointer;
         }
       }
