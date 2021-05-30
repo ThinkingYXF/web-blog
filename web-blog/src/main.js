@@ -11,7 +11,11 @@ import filter from "./common/filter"
 
 Vue.prototype.apis = apis;
 Vue.prototype.$message = Message
-Vue.prototype.basePreImg = "http://127.0.0.1:8080"
+if (process.env.NODE_ENV == "development") {
+  Vue.prototype.basePreImg = "http://127.0.0.1:8080"
+} else if (process.env.NODE_ENV == "production") {
+  Vue.prototype.basePreImg = "http://39.103.212.0:8080"
+}
 
 Object.keys(filter).forEach((key) => {
   Vue.filter(key, filter[key])

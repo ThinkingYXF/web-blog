@@ -26,7 +26,7 @@ articleRouter.get("/articleList", async ctx => {
     }
   } catch (e) {
     console.log("error: ", e)
-    message.setUnLogin()
+    message.setFalseMsg(500, e);
     ctx.body = message;
   }
 })
