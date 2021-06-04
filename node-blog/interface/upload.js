@@ -46,7 +46,7 @@ uploadRouter.post("/singleUpload", async (ctx, next) => {
             }
         } catch (e) {
             console.log("error: ", e)
-            message.setFalseMsg(500, e)
+            message.setFalseMsg(500, e.message)
             ctx.body = message
         }
     }
@@ -83,7 +83,7 @@ uploadRouter.post("/multiUpload", async (ctx, next) => {
             }
         } catch (e) {
             console.log("error: ", e)
-            message.setFalseMsg(500, e)
+            message.setFalseMsg(500, e.message)
             ctx.body = message
         }
     }
@@ -112,7 +112,35 @@ uploadRouter.get("/getResouces", async ctx => {
         }
     } catch (e) {
         console.log("error: ", e)
-        message.setFalseMsg(500, e);
+        message.setFalseMsg(500, e.message);
+        ctx.body = message
+    }
+})
+
+/**
+ * 删除文件夹下文件
+ */
+uploadRouter.get("/deleteFile", async ctx => {
+    let message = new MessageDTO()
+    let userInfo = null
+    try {
+        userInfo = await jwt.checkToken(ctx.request.header.authorization)
+        if (userInfo === null) {
+            message.setUnLogin()
+            ctx.body = message
+        } else {
+            jwt.refreshToken(userInfo, ctx)
+            let result = []
+            let files = fs.readdirSync("./static/uploads");
+            files.forEach(v => {
+                result.push(v);
+            });
+            message.setResult(result)
+            ctx.body = message
+        }
+    } catch (e) {
+        console.log("error: ", e)
+        message.setFalseMsg(500, e.message);
         ctx.body = message
     }
 })

@@ -39,6 +39,14 @@ $https.interceptors.response.use(
       })
     } else if (res.data.code != 200) {
       if (res.data.message) {
+        if (res.data.message == "jwt expired") {
+          store.commit("setToken", "")
+          Message.warning("登录超时")
+          router.replace({
+            path: "/"
+          })
+          return;
+        }
         Message.warning(res.data.message)
       } else {
         Message.warning("系统繁忙，请稍后重试")

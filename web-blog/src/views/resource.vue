@@ -6,7 +6,7 @@ export default {
   created() {
     let url = this.$route.query.url;
     console.log(url);
-    location.href = "/uploads" + url;
+    location.href = "/uploads/" + url;
   },
 };
 </script>

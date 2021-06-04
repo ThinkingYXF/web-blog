@@ -26,7 +26,7 @@ articleRouter.get("/articleList", async ctx => {
     }
   } catch (e) {
     console.log("error: ", e)
-    message.setFalseMsg(500, e);
+    message.setFalseMsg(500, e.message);
     ctx.body = message;
   }
 })

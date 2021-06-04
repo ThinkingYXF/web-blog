@@ -32,7 +32,7 @@
           v-for="(v, i) in result"
           :key="i"
         >
-          <v-chip class="file">
+          <v-chip class="file" close @click:close="del(v)">
             {{ v }}
           </v-chip>
         </a>
@@ -74,6 +74,9 @@ export default {
           this.$message.success("上传成功");
         }
       });
+    },
+    del(v) {
+      console.log(v);
     },
   },
 };
