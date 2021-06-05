@@ -19,5 +19,9 @@ export default {
   //多文件上传
   uploadFiles(params) {
     return $postFiles("/multiUpload", params)
+  },
+  //删除文件
+  deleteFile(params) {
+    return $post("/deleteFile", params)
   }
 }

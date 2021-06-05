@@ -38,6 +38,23 @@
         </a>
       </div>
     </div>
+
+    <v-dialog v-model="confirmDialog" width="400">
+      <v-card>
+        <v-card-title>
+          <span class="text-h6">确定删除该文件？</span>
+        </v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="confirmDialog = false">
+            取消
+          </v-btn>
+          <v-btn color="blue darken-1" text @click="confirmDelTask">
+            确定
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -50,6 +67,8 @@ export default {
     return {
       files: [],
       result: [],
+      confirmDialog: false,
+      nowFile: "",
     };
   },
   created() {},
@@ -76,7 +95,21 @@ export default {
       });
     },
     del(v) {
-      console.log(v);
+      this.confirmDialog = true;
+      this.nowFile = v;
+    },
+    confirmDelTask() {
+      this.apis
+        .deleteFile({
+          files: [this.nowFile],
+        })
+        .then((res) => {
+          if (res.code == 200) {
+            this.confirmDialog = false;
+            this.$message.success("删除成功");
+            this.getFiles();
+          }
+        });
     },
   },
 };

@@ -120,9 +120,10 @@ uploadRouter.get("/getResouces", async ctx => {
 /**
  * 删除文件夹下文件
  */
-uploadRouter.get("/deleteFile", async ctx => {
+uploadRouter.post("/deleteFile", async ctx => {
     let message = new MessageDTO()
     let userInfo = null
+    let req = ctx.request.body
     try {
         userInfo = await jwt.checkToken(ctx.request.header.authorization)
         if (userInfo === null) {
@@ -130,12 +131,11 @@ uploadRouter.get("/deleteFile", async ctx => {
             ctx.body = message
         } else {
             jwt.refreshToken(userInfo, ctx)
-            let result = []
-            let files = fs.readdirSync("./static/uploads");
+            let files = req.files
             files.forEach(v => {
-                result.push(v);
+                fs.unlinkSync("./static/uploads/" + v);
             });
-            message.setResult(result)
+            message.setTrueMsg("删除成功")
             ctx.body = message
         }
     } catch (e) {
